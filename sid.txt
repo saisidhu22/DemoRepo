@@ -9,3 +9,4 @@ branch
 editing in the feature branch
 
 edited in Feature
+newtext in feature

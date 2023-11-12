@@ -36,7 +36,7 @@ In a Kubernetes environment, containers are ephemeral, meaning their data is los
 - **Use Case:** Integrates with external storage systems via CSI drivers.
 - **Implementation:** Allows storage vendors to create custom storage plugins without modifying Kubernetes source code.
 
-## Volume Mounts in Pods
+# Volume Mounts in Pods
 
 In Kubernetes, volume mounts allow containers within a Pod to access and share volumes. A volume mount is specified in a Pod's container definition, linking a volume to a specific path in the container's filesystem.
 

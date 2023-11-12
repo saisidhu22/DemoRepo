@@ -41,6 +41,8 @@ In a Kubernetes environment, containers are ephemeral, meaning their data is los
 In Kubernetes, volume mounts allow containers within a Pod to access and share volumes. A volume mount is specified in a Pod's container definition, linking a volume to a specific path in the container's filesystem.
 
 
+### **EmptyDir Example**
+
 ```markdown
 # EmptyDir Pod Example
 

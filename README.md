@@ -495,7 +495,6 @@ my-ebs-pvc   Bound    my-ebs-pv   5Gi        RWO            gp2            10m
 
 ### Storage Configuration (`storage.yml`)
 
-```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:

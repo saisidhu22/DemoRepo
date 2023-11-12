@@ -217,8 +217,6 @@ spec:
 
 
 
-
-
 # Kubernetes Storage Concepts
 
 ## Overview
@@ -271,6 +269,87 @@ Using a **StorageClass** in Kubernetes is beneficial for dynamic provisioning of
   - **CSI (Container Storage Interface):** Defines a standard interface between container orchestrators (like Kubernetes) and storage providers.
   - **PVs and PVCs:** Can use CSI drivers to interact with external storage systems.
   - While PV and PVC are Kubernetes-native concepts, the CSI interface provides a standardized way for Kubernetes to communicate with external storage systems. CSI allows storage vendors to develop plugins that can be used by PVs and PVCs to access external storage.
+
+
+
+
+```markdown
+# Cross-Cloud Storage with Kubernetes CSI
+
+When dealing with cross-cloud storage solutions, the Container Storage Interface (CSI) plays a crucial role in allowing Kubernetes to integrate with various cloud providers. Below are examples of how you can provision storage using CSI for both AWS (Amazon Elastic Block Store - EBS) and Azure (Azure Disk).
+
+## AWS (EBS) CSI Example
+
+Assuming you have the AWS CSI Driver installed, you can use it to provision EBS volumes in your Kubernetes cluster.
+
+### 1. Create a StorageClass for EBS:
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp2
+```
+
+### 2. Create a PVC that uses the EBS StorageClass:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  storageClassName: ebs-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+```
+
+## Azure (Disk) CSI Example
+
+Similarly, for Azure, assuming you have the Azure CSI Driver installed:
+
+### 1. Create a StorageClass for Azure Disk:
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: azure-disk-sc
+provisioner: disk.csi.azure.com
+parameters:
+  storageaccounttype: Standard_LRS
+```
+
+### 2. Create a PVC that uses the Azure Disk StorageClass:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc-azure
+spec:
+  storageClassName: azure-disk-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+```
+
+## Relationship
+
+Both examples showcase the use of CSI drivers for different cloud providers (AWS and Azure) through StorageClasses and PVCs. These configurations allow Kubernetes to dynamically provision and manage persistent volumes on these cloud platforms. The key is to use the appropriate CSI driver and configure the corresponding parameters in the StorageClass definition.
+```
+
+
+
+
 
 
 ## Statically Provisioning EBS Volume

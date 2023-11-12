@@ -574,6 +574,8 @@ spec:
     persistentVolumeClaim:
       claimName: ebs-claim-changable
 ```
+You can change the PersistentVolumeClaim yml file to increase the storage capacity. 
+Change the storage: 3Gi. Apply the yml file again and check the volume size increased or not.
 
 ### Deletion Commands
 

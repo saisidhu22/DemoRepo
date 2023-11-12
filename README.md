@@ -114,5 +114,100 @@ volumes:
 
 
 
+```markdown
+# HostPath Pod Examples
+
+This repository contains examples of Kubernetes Pods using hostPath volumes for storage.
+
+## Pod 1: hostpath-pod-1
+
+### Configuration
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-pod-1
+spec:
+  containers:
+  - name: container-1
+    image: busybox
+    command: ["/bin/sh"]
+    args: ["-c", "echo 'Pod IP: $(hostname -i)' > /cache/pod_ip.txt ; date > /cache/date.txt ; sleep 1000"]
+    volumeMounts:
+    - mountPath: /cache
+      name: hostpath-volume
+  volumes:
+  - name: hostpath-volume
+    hostPath:
+      path: /tmp
+      type: DirectoryOrCreate
+```
+
+### Usage
+
+1. Apply the Pod configuration:
+
+    ```bash
+    kubectl apply -f hostpath-pod-1.yaml
+    ```
+
+2. Check Pod details:
+
+    ```bash
+    kubectl describe pod hostpath-pod-1
+    ```
+
+3. Access the container's shell:
+
+    ```bash
+    kubectl exec -it hostpath-pod-1 -c container-1 -- sh
+    ```
+
+## Pod 2: hostpath-pod-2
+
+### Configuration
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-pod-2
+spec:
+  containers:
+  - name: container-1
+    image: busybox
+    command: ["/bin/sh"]
+    args: ["-c", "echo 'Pod IP: $(hostname -i)' > /cache/pod_ip.txt ; date > /cache/date.txt ; sleep 1000"]
+    volumeMounts:
+    - mountPath: /cache
+      name: hostpath-volume
+  volumes:
+  - name: hostpath-volume
+    hostPath:
+      path: /tmp
+      type: DirectoryOrCreate
+```
+
+### Usage
+
+1. Apply the Pod configuration:
+
+    ```bash
+    kubectl apply -f hostpath-pod-2.yaml
+    ```
+
+2. Check Pod details:
+
+    ```bash
+    kubectl describe pod hostpath-pod-2
+    ```
+
+3. Access the container's shell:
+
+    ```bash
+    kubectl exec -it hostpath-pod-2 -c container-1 -- sh
+    ```
+
 
 

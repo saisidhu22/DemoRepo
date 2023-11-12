@@ -53,7 +53,7 @@ This example demonstrates the use of an `emptyDir` volume in a Kubernetes Pod. T
 
 ## YAML Configuration
 
-```yaml
+
 apiVersion: v1
 kind: Pod
 metadata:

@@ -217,6 +217,60 @@ spec:
 
 ## Statically Provisioning EBS Volume
 
+
+# Kubernetes Storage Concepts
+
+## Persistent Volume (PV)
+
+A **Persistent Volume (PV)** in Kubernetes is a networked storage resource provisioned in the cluster:
+
+- Represents physical storage resources, like disks or network-attached storage.
+- Managed separately from applications.
+  
+## Persistent Volume Claim (PVC)
+
+A **Persistent Volume Claim (PVC)** is a user's request for storage:
+
+- Allows pods to request storage without knowledge of underlying infrastructure.
+- Binds to a matching PV based on specified criteria (storage class, access mode, size).
+- Used as a volume in a pod once bound to a PV.
+
+## StorageClass
+
+A **StorageClass** is an abstraction describing the class of storage:
+
+- Defines storage classes with different performance characteristics and provisioning policies.
+- Useful for dynamic provisioning of storage.
+- Can specify provisioner, parameters, and control features like volume expansion and binding modes.
+
+## Usage in a README.md
+
+### Why use `StorageClass.yml`
+
+Using a `StorageClass` in Kubernetes is beneficial for dynamic provisioning of storage based on predefined policies:
+
+- **Provisioner:** Specify the plugin or service responsible for provisioning the volume.
+- **Parameters:** Define provisioner-specific parameters (e.g., volume type, replication factor).
+- **Control:** Manage features like volume expansion and binding modes.
+
+### Example StorageClass Configuration
+
+Here's an example `StorageClass.yml`:
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast
+provisioner: k8s.io/aws-ebs
+parameters:
+  type: gp2
+
+
+
+
+
+
 ```markdown
 ## Step 1: Create EBS Volume
 
@@ -464,7 +518,6 @@ kubectl delete pod app
 kubectl delete pvc ebs-claim-changable
 kubectl delete storageclass ebs-sc
 ```
-
 
 
 

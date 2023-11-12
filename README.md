@@ -215,8 +215,107 @@ spec:
     ```
 
 
+Certainly! Here's the content formatted for a README.md file:
 
-    
+```markdown
+# Statically Provisioning EBS Volume
+
+## Step 1: Create EBS Volume
+
+Create an EBS volume of 2Gi and copy the Volume ID.
+
+## Step 2: Use Persistent Storage in Amazon EKS
+
+To set up persistent storage in Amazon EKS, refer to the AWS document: [How do I use persistent storage in Amazon EKS?](https://repost.aws/knowledge-center/eks-persistent-storage)
+
+## Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) Driver
+
+### pv.yml
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: test-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  csi:
+    driver: ebs.csi.aws.com
+    fsType: ext4
+    volumeHandle: vol-0a79559fbxx1815860bXX
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: topology.ebs.csi.aws.com/zone
+              operator: In
+              values:
+                - us-east-1a
+```
+
+### pvc.yml
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-claim
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+```
+
+### pod.yml
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+spec:
+  containers:
+  - name: app
+    image: centos
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do echo $(date -u) >> /data/out.txt; sleep 5; done"]
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /data
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: ebs-claim
+```
+
+## Useful Commands
+
+- Check disk space information for the /data directory inside the pod:
+
+  ```bash
+  kubectl exec -it my-pod -- df -h /data
+  ```
+
+- Show disk space information for a specific PersistentVolume:
+
+  ```bash
+  kubectl describe pv PV_NAME | grep Volume
+  ```
+
+- Delete all resources:
+
+  ```bash
+  kubectl delete pods,services,pv,pvc,storageclass --all
+  ```
+Feel free to customize it further based on your specific needs!
+```
+
 
 
 

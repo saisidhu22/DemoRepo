@@ -443,6 +443,51 @@ spec:
   kubectl delete pods,services,pv,pvc,storageclass --all
   ```
 
+
+```markdown
+# Understanding Kubernetes Persistent Volumes
+
+The following commands in Kubernetes are used to list Persistent Volumes (PVs) and Persistent Volume Claims (PVCs):
+
+### `kubectl get pv`:
+
+The output of `kubectl get pv` provides information about the Persistent Volumes in the cluster. Below is an example output with explanations for each field:
+
+```plaintext
+NAME        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+my-ebs-pv   5Gi        RWO            Retain           Bound      default/my-ebs-pvc   gp2            12m
+```
+
+- **NAME:** The name of the Persistent Volume.
+- **CAPACITY:** Storage capacity of the volume.
+- **ACCESS MODES:** Defines how the volume can be mounted (e.g., `RWO` for ReadWriteOnce).
+- **RECLAIM POLICY:** Specifies how the volume should be handled when released, such as `Retain` or `Delete`.
+- **STATUS:** Current status of the Persistent Volume (e.g., `Available`, `Bound`, `Released`).
+- **CLAIM:** Namespace and name of the PVC if the volume is bound.
+- **STORAGECLASS:** StorageClass used by the PV.
+- **REASON:** Additional information or reason for the current status.
+- **AGE:** Age of the Persistent Volume.
+
+### `kubectl get pvc`:
+
+The output of `kubectl get pvc` provides information about the Persistent Volume Claims in the cluster. Below is an example output with explanations for each field:
+
+```plaintext
+NAME         STATUS   VOLUME     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+my-ebs-pvc   Bound    my-ebs-pv   5Gi        RWO            gp2            10m
+```
+
+- **NAME:** The name of the Persistent Volume Claim.
+- **STATUS:** Current status of the PVC (e.g., `Bound`, `Pending`, `Lost`).
+- **VOLUME:** Name of the PV if the PVC is bound.
+- **CAPACITY:** Storage capacity of the volume claimed by the PVC.
+- **ACCESS MODES:** Access modes defined for the volume.
+- **STORAGECLASS:** StorageClass used by the PVC.
+- **AGE:** Age of the Persistent Volume Claim.
+```
+
+
+
 ## Dynamic Provisioning in Kubernetes with AWS EBS
 
 ```markdown

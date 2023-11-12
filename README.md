@@ -215,16 +215,14 @@ spec:
     ```
 
 
-Certainly! Here's the content formatted for a README.md file:
+## Statically Provisioning EBS Volume
 
 ```markdown
-# Statically Provisioning EBS Volume
-
 ## Step 1: Create EBS Volume
 
 Create an EBS volume of 2Gi and copy the Volume ID.
 
-## Step 2: Use Persistent Storage in Amazon EKS
+## Step 2: Use Persistent Storage in AWS EKS
 
 To set up persistent storage in Amazon EKS, refer to the AWS document: [How do I use persistent storage in Amazon EKS?](https://repost.aws/knowledge-center/eks-persistent-storage)
 

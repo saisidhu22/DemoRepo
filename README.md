@@ -484,8 +484,6 @@ my-ebs-pvc   Bound    my-ebs-pv   5Gi        RWO            gp2            10m
 - **ACCESS MODES:** Access modes defined for the volume.
 - **STORAGECLASS:** StorageClass used by the PVC.
 - **AGE:** Age of the Persistent Volume Claim.
-```
-
 
 
 ## Dynamic Provisioning in Kubernetes with AWS EBS

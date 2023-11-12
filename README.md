@@ -314,9 +314,3 @@ spec:
   ```bash
   kubectl delete pods,services,pv,pvc,storageclass --all
   ```
-Feel free to customize it further based on your specific needs!
-```
-
-
-
-

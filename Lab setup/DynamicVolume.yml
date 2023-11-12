@@ -44,3 +44,21 @@ spec:
   - name: persistent-storage
     persistentVolumeClaim:
       claimName: ebs-claim
+
+To describe the YAML resources before deletion, you can use the `kubectl describe` command. Here are the commands:
+
+1. **Describe the Pod:**
+   kubectl describe pod app
+   
+2. **Describe the PersistentVolumeClaim (PVC):**
+   kubectl describe pvc ebs-claim
+ 
+3. **Describe the StorageClass:**
+   kubectl describe storageclass ebs-sc
+
+kubectl get pods
+kubectl get pvc
+kubectl get storageclasses
+kubectl delete pod app
+kubectl delete pvc ebs-claim
+kubectl delete storageclass ebs-sc

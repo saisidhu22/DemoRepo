@@ -356,7 +356,7 @@ Create an EBS volume of 2Gi and copy the Volume ID.
 ## Step 2: Use Persistent Storage in AWS EKS
 
 To set up persistent storage in Amazon EKS, refer to the AWS document: 
-[How do I use persistent storage in Amazon EKS?](https://repost.aws/knowledge-center/eks-persistent-storage)
+(https://repost.aws/knowledge-center/eks-persistent-storage)
 ```
 
 ### pv.yml

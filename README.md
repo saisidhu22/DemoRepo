@@ -49,7 +49,8 @@ In Kubernetes, volume mounts allow containers within a Pod to access and share v
 
 ## Overview
 
-This example demonstrates the use of an `emptyDir` volume in a Kubernetes Pod. The `emptyDir` volume is used for temporary storage within a Pod, suitable for scenarios where communication or coordination is required between containers running in the same Pod.
+This example demonstrates the use of an `emptyDir` volume in a Kubernetes Pod.
+The `emptyDir` volume is used for temporary storage within a Pod, suitable for scenarios where communication or coordination is required between containers running in the same Pod.
 
 ## YAML Configuration
 

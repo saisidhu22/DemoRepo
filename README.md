@@ -314,3 +314,159 @@ spec:
   ```bash
   kubectl delete pods,services,pv,pvc,storageclass --all
   ```
+
+## Dynamic Provisioning in Kubernetes with AWS EBS
+
+```markdown
+
+
+## Setup 1: Non-Changable PVC
+
+### Storage Configuration (`storage.yml`)
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp2
+volumeBindingMode: WaitForFirstConsumer
+```
+
+### Persistent Volume Claim (`pvc.yml`)
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ebs-sc
+  resources:
+    requests:
+      storage: 1Gi
+```
+
+### Pod Configuration (`pod.yml`)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+spec:
+  containers:
+  - name: app
+    image: centos
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do echo $(date -u) >> /data/out.txt; sleep 5; done"]
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /data
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: ebs-claim
+```
+
+### Deletion Commands
+
+Before deletion, describe the resources:
+
+```bash
+kubectl describe pod app
+kubectl describe pvc ebs-claim
+kubectl describe storageclass ebs-sc
+```
+
+Then delete the resources:
+
+```bash
+kubectl delete pod app
+kubectl delete pvc ebs-claim
+kubectl delete storageclass ebs-sc
+```
+
+## Setup 2: Changable PVC
+
+### Storage Configuration (`storage.yml`)
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp2
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+```
+
+### Persistent Volume Claim (`chanPVC.yml`)
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-claim-changable
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ebs-sc"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ebs-sc
+  resources:
+    requests:
+      storage: 2Gi
+```
+
+### Pod Configuration (`pod.yml`)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+spec:
+  containers:
+  - name: app
+    image: centos
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do echo $(date -u) >> /data/out.txt; sleep 5; done"]
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /data
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: ebs-claim-changable
+```
+
+### Deletion Commands
+
+Before deletion, describe the resources:
+
+```bash
+kubectl describe pod app
+kubectl describe pvc ebs-claim-changable
+kubectl describe storageclass ebs-sc
+```
+
+Then delete the resources:
+
+```bash
+kubectl delete pod app
+kubectl delete pvc ebs-claim-changable
+kubectl delete storageclass ebs-sc
+```
+
+
+
+
+
+

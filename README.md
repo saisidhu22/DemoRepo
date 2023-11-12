@@ -111,11 +111,10 @@ volumes:
 
 **Caution:** Using `Memory` as the storage medium results in data loss on Pod restart or rescheduling.
 
+=========================================================================================
 
 
-===========================================================================================================
-
-
+### HostPath Pod Examples
 
 ```markdown
 # HostPath Pod Examples

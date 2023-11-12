@@ -490,10 +490,10 @@ my-ebs-pvc   Bound    my-ebs-pv   5Gi        RWO            gp2            10m
 
 ## Dynamic Provisioning in Kubernetes with AWS EBS
 
-```markdown
-
 
 ## Setup 1: Non-Changable PVC
+
+```markdown
 
 ### Storage Configuration (`storage.yml`)
 

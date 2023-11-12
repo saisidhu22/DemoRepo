@@ -216,7 +216,7 @@ spec:
     ```
 
 
-## Statically Provisioning EBS Volume
+
 
 
 # Kubernetes Storage Concepts
@@ -266,11 +266,6 @@ Using a **StorageClass** in Kubernetes is beneficial for dynamic provisioning of
 
 - **CSI Volumes:** Allows storage vendors to create custom storage plugins without modifying Kubernetes source code.
 
-## Relationship
-
-- **PV and PVC are NOT part of CSI:**
-  - Native Kubernetes concepts for managing storage within the cluster.
-  - Not specifically designed for integrating with external storage systems.
 
 - **CSI and PV/PVC:**
   - **CSI (Container Storage Interface):** Defines a standard interface between container orchestrators (like Kubernetes) and storage providers.
@@ -278,7 +273,7 @@ Using a **StorageClass** in Kubernetes is beneficial for dynamic provisioning of
   - While PV and PVC are Kubernetes-native concepts, the CSI interface provides a standardized way for Kubernetes to communicate with external storage systems. CSI allows storage vendors to develop plugins that can be used by PVs and PVCs to access external storage.
 
 
-
+## Statically Provisioning EBS Volume
 
 ```markdown
 ## Step 1: Create EBS Volume

@@ -44,6 +44,7 @@ In Kubernetes, volume mounts allow containers within a Pod to access and share v
 ### **EmptyDir Example**
 
 ```markdown
+
 # EmptyDir Pod Example
 
 ## Overview
@@ -75,6 +76,8 @@ spec:
   - name: shared-data
     emptyDir: {}
 ```
+
+
 
 ## Usage
 
@@ -210,187 +213,6 @@ spec:
     ```bash
     kubectl exec -it hostpath-pod-2 -c container-1 -- sh
     ```
-
-
-
-
-
-Certainly! To enable code copying in a README.md file, you can use a tool like [Clipboard.js](https://clipboardjs.com/) along with some additional HTML and JavaScript. Below is the modified README.md file with code copying functionality:
-
-```markdown
-# HostPath Pod Examples
-
-This repository contains examples of Kubernetes Pods using hostPath volumes for storage.
-
-## Pod 1: hostpath-pod-1
-
-### Configuration
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hostpath-pod-1
-spec:
-  containers:
-  - name: container-1
-    image: busybox
-    command: ["/bin/sh"]
-    args: ["-c", "echo 'Pod IP: $(hostname -i)' > /cache/pod_ip.txt ; date > /cache/date.txt ; sleep 1000"]
-    volumeMounts:
-    - mountPath: /cache
-      name: hostpath-volume
-  volumes:
-  - name: hostpath-volume
-    hostPath:
-      path: /tmp
-      type: DirectoryOrCreate
-```
-<details>
-<summary>Copy Configuration</summary>
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hostpath-pod-1
-spec:
-  containers:
-  - name: container-1
-    image: busybox
-    command: ["/bin/sh"]
-    args: ["-c", "echo 'Pod IP: $(hostname -i)' > /cache/pod_ip.txt ; date > /cache/date.txt ; sleep 1000"]
-    volumeMounts:
-    - mountPath: /cache
-      name: hostpath-volume
-  volumes:
-  - name: hostpath-volume
-    hostPath:
-      path: /tmp
-      type: DirectoryOrCreate
-```
-</details>
-
-### Usage
-
-1. Apply the Pod configuration:
-
-    <details>
-    <summary>Copy Command</summary>
-
-    ```bash
-    kubectl apply -f hostpath-pod-1.yaml
-    ```
-    </details>
-
-2. Check Pod details:
-
-    <details>
-    <summary>Copy Command</summary>
-
-    ```bash
-    kubectl describe pod hostpath-pod-1
-    ```
-    </details>
-
-3. Access the container's shell:
-
-    <details>
-    <summary>Copy Command</summary>
-
-    ```bash
-    kubectl exec -it hostpath-pod-1 -c container-1 -- sh
-    ```
-    </details>
-
-## Pod 2: hostpath-pod-2
-
-### Configuration
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hostpath-pod-2
-spec:
-  containers:
-  - name: container-1
-    image: busybox
-    command: ["/bin/sh"]
-    args: ["-c", "echo 'Pod IP: $(hostname -i)' > /cache/pod_ip.txt ; date > /cache/date.txt ; sleep 1000"]
-    volumeMounts:
-    - mountPath: /cache
-      name: hostpath-volume
-  volumes:
-  - name: hostpath-volume
-    hostPath:
-      path: /tmp
-      type: DirectoryOrCreate
-```
-<details>
-<summary>Copy Configuration</summary>
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hostpath-pod-2
-spec:
-  containers:
-  - name: container-1
-    image: busybox
-    command: ["/bin/sh"]
-    args: ["-c", "echo 'Pod IP: $(hostname -i)' > /cache/pod_ip.txt ; date > /cache/date.txt ; sleep 1000"]
-    volumeMounts:
-    - mountPath: /cache
-      name: hostpath-volume
-  volumes:
-  - name: hostpath-volume
-    hostPath:
-      path: /tmp
-      type: DirectoryOrCreate
-```
-</details>
-
-### Usage
-
-1. Apply the Pod configuration:
-
-    <details>
-    <summary>Copy Command</summary>
-
-    ```bash
-    kubectl apply -f hostpath-pod-2.yaml
-    ```
-    </details>
-
-2. Check Pod details:
-
-    <details>
-    <summary>Copy Command</summary>
-
-    ```bash
-    kubectl describe pod hostpath-pod-2
-    ```
-    </details>
-
-3. Access the container's shell:
-
-    <details>
-    <summary>Copy Command</summary>
-
-    ```bash
-    kubectl exec -it hostpath-pod-2 -c container-1 -- sh
-    ```
-    </details>
-
-Feel free to customize it further based on your specific needs!
-
-
-
-
-
-
 
 
 

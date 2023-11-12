@@ -345,12 +345,6 @@ spec:
 ## Relationship
 
 Both examples showcase the use of CSI drivers for different cloud providers (AWS and Azure) through StorageClasses and PVCs. These configurations allow Kubernetes to dynamically provision and manage persistent volumes on these cloud platforms. The key is to use the appropriate CSI driver and configure the corresponding parameters in the StorageClass definition.
-```
-
-
-
-
-
 
 ## Statically Provisioning EBS Volume
 

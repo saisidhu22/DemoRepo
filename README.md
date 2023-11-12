@@ -231,7 +231,7 @@ To set up persistent storage in Amazon EKS, refer to the AWS document:
 
 
 
-### pv.yml
+pv.yml
 
 ```yaml
 apiVersion: v1

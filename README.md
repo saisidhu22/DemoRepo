@@ -281,7 +281,7 @@ When dealing with cross-cloud storage solutions, the Container Storage Interface
 ## AWS (EBS) CSI Example
 
 Assuming you have the AWS CSI Driver installed, you can use it to provision EBS volumes in your Kubernetes cluster.
-
+```
 ### 1. Create a StorageClass for EBS:
 
 ```yaml

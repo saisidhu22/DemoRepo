@@ -111,8 +111,6 @@ volumes:
 
 **Caution:** Using `Memory` as the storage medium results in data loss on Pod restart or rescheduling.
 
-Feel free to adjust the formatting and content based on your preferences and specific needs.
-```
 
 
 
